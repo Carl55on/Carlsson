@@ -1,0 +1,85 @@
+package com.javarush.test.level09.lesson11.home03;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
+
+/**
+ * Created by carlsson on 03.02.16.
+ */
+public class Massives
+{
+    public static void main(String[] args)
+    {
+        int[] mas = domas();
+        toprint(mas);
+        sortmas(mas);
+        toprint(mas);
+
+    }
+
+    static int[] domas()
+    {
+        Random rand = new Random();
+        int r = rand.nextInt(10);
+        if (r < 3)
+        {
+            r += 3;
+        }
+
+        System.out.println("Массив размером " + r);
+        int[] mas = new int[r];
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i = 0; i < r; i++)
+        {
+            try
+            {
+                String line = reader.readLine();
+                mas[i] = Integer.parseInt(line);
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Vvedi 4islo!");
+                --i;
+            }
+            catch (IOException ee)
+            {
+                System.out.println("Vvedi 4islo! ALLO! ");
+                --i;
+            }
+        }
+
+        return mas;
+    }
+
+    static void toprint(int[] mas)
+    {   System.out.println();
+        for (int i : mas)
+        {
+            System.out.print(i + " ");
+
+        }
+        System.out.println();
+    }
+
+    static int[] sortmas(int[] mas)
+    {
+        for (int y = 0; y < mas.length; y++)
+        {
+            for (int i = 0; i < mas.length - 1; i++)
+            {
+                if (mas[i] > mas[i + 1])
+                {
+                    int v = mas[i];
+                    mas[i] = mas[i + 1];
+                    mas[i + 1] = v;
+
+                }
+            }
+        }
+
+        return mas;
+    }
+}
